@@ -1,0 +1,23 @@
+# New MAPER cohort checklist
+
+- Inventory original images, IDs, mappings, and checksums.
+- Select representative normal, difficult, and largest-volume cases.
+- Audit qform/sform, orientation, voxel dimensions, and centring.
+- Run preprocessing on representatives before batch processing.
+- Canonicalize -> reorient -> centre -> N4.
+- Run Pincram on representatives and visually inspect masks.
+- Batch Pincram only after representative acceptance.
+- Record Pincram visual QC for every target.
+- Generate PosNorm transforms.
+- Freeze/checksum prepared target products.
+- Populate MAPER target caches deliberately with one source.
+- Validate MAPER resource settings for the current site.
+- Run pair registrations with one CPU/thread where appropriate.
+- Run fusion with a memory-sufficient allocation.
+- For additional source label sets, reuse saved DOFs.
+- Chunk very short cached-DOF propagation tasks within Slurm jobs.
+- Visually QC fused outputs.
+- Restore outputs to the exact original target geometry.
+- Verify qform, sform, dimensions, and codes against originals.
+- Create collaborator-facing deliverables and checksums.
+- Record exceptions and QC flags in the cohort manifest.
