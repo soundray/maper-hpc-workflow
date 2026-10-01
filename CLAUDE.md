@@ -63,7 +63,9 @@ function libraries and Markdown operational documentation.
 - Collaborator-facing outputs must be restored to the exact original
   input geometry (reverse the storage-orientation transform, reapply the
   original header, no interpolation) before delivery, with qform/sform/
-  dimensions/codes verified against the original.
+  dimensions/codes verified against the original. Exception: if targets
+  were resampled, labels are first nearest-neighbour resampled back to
+  the centred native grid (runbook §12.1).
 - HD-BET is deliberately excluded from this workflow.
 - Pincram's checkpoint/archive (`-pickup`) machinery is legacy and not
   part of the production workflow; treat it as known cruft, not a

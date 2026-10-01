@@ -76,6 +76,37 @@ substantially displaced origins.
 If the input images have unusually high resolution, downsampling may
 be needed to enable processing within memory and time constraints.
 
+Resampling is conditional and is the only step in target preparation
+that interpolates. It runs after centring and before N4; keep the
+centred native-resolution image (`03-centred.nii.gz`) because output
+restoration depends on it.
+
+Before choosing a method, check whether the high resolution is real or
+the result of zero-filled reconstruction:
+
+- compare acquisition and reconstruction matrices in the sidecars
+  (e.g. dcm2niix `AcquisitionMatrixPE` / `ReconMatrixPE`);
+- confirm with the in-plane power spectrum of a native image.
+
+For zero-filled inputs, Fourier (k-space) cropping to the acquired
+resolution is preferred: it keeps the field of view exactly, recovers
+the acquired image with negligible loss, and, with a half-voxel phase
+shift, keeps the grid centre fixed. Apply NIfTI scaling, write float32
+with sform := qform, and clamp Gibbs-ringing negatives to 0 before N4.
+Reference implementation: `pre-neumra/scripts/fourier-crop.py`
+(800x800 at 0.3 mm in-plane -> 320x320 at 0.75 mm, the acquired
+resolution of a 322x336 Philips acquisition).
+
+Methods found unsuitable (pre-neumra):
+
+- ANTs `ResampleImageBySpacing` with smoothing: poor image quality;
+- MIRTK `resample-image`: ignores `scl_slope`/`scl_inter`, writes the
+  input datatype (integer rounding), and writes 4-D singleton images with
+  sform code 0.
+
+Record any resampling, its target grid, and its effect on restoration
+in the cohort's `processing-history.md`.
+
 ## 4. Production target preprocessing
 
 Current production recipe:
@@ -84,6 +115,7 @@ Current production recipe:
       -> canonicalize
       -> storage reorientation
       -> centre origin
+      -> [resample, only if needed; see 3.4]
       -> unmasked default N4
       -> Pincram
       -> PosNorm
@@ -229,6 +261,24 @@ orientation reproduces the original raw voxel array exactly.
 
 Then verify restored qform, sform, dimensions and codes against the
 original input.
+
+### 12.1 Exception: resampled targets
+
+If targets were resampled (section 3.4), segmentations live on the
+resampled grid and cannot be restored without interpolation. In that
+case only:
+
+- first resample labels with nearest-neighbour interpolation from the
+  prepared grid onto the centred native grid (`03-centred.nii.gz`);
+- then restore as above (reverse storage orientation, original header,
+  no further interpolation).
+
+The exact raw-voxel round-trip check still applies to the
+orientation/header steps, using the original image. The final qform,
+sform, dimension and code checks against the original input are
+unchanged. Record the exception in the cohort's `processing-history.md`
+and in collaborator-facing notes, since label boundaries are limited by
+the resampled grid.
 
 ## 13. Provenance and QC
 
