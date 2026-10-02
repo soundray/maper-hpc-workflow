@@ -120,6 +120,9 @@ Current production recipe:
       -> Pincram
       -> PosNorm
 
+If bias residue causes mask underinclusion, use the two-stage N4 option
+below.
+
 No routine FOV cropping is performed.
 
 A difficult image may be retained with a QC flag rather than forcing the
@@ -131,6 +134,42 @@ Use default 3-D N4 parameters unless a documented experiment establishes
 otherwise.
 
 Do not generalize special settings from stress-test cases.
+
+### Two-stage N4 (option)
+
+A single unmasked N4 can leave substantial low-frequency bias, for
+example centre-bright "blooming" and a darker superior brain. Pincram
+then underincludes superior cortex, and MAPER labels follow the mask, so
+the underinclusion carries through to the segmentation whatever the
+MAPER settings.
+
+Two-stage recipe:
+
+    centred (or resampled) image, uncorrected
+      -> unmasked default N4 -> Pincram (stage 1)
+      -> default N4 on the *uncorrected* image, masked (-x) with the
+         stage-1 Pincram icv.nii.gz -> Pincram (stage 2)
+      -> PosNorm
+
+Keep default N4 parameters for the second pass. In pre-neumra, extra
+effort (shrink 2, more iterations, full resolution) trended towards
+overcorrection with falling WM/GM contrast, and an additional fitting
+level clearly flattened tissue contrast. Do not use white-matter
+weighting: no WM map exists before MAPER in routine work.
+
+Use it when masks or segmentations show superior underinclusion, or when
+the residual bias is visible (e.g. brightness spreading from the centre
+as the window is raised). Judge it on visual mask QC, not mask volume.
+
+Cost: one extra Pincram run per target (see the site profile for
+work-dir size).
+
+Evidence (pre-neumra, 10 targets): masks grew by 12-73 ml, most at the
+superior end, and most where the stage-1 underinclusion was worst. All
+masks were accepted on visual QC; one had overinclusions accepted as
+harmless. An earlier variant on mubaraq (second N4 applied to the
+already-corrected image, judged on two cases by mask only) was not
+adopted.
 
 ## 5. Pincram
 
