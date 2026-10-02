@@ -225,9 +225,15 @@ allocations rather than submitted one per pair.
 Fusion of 30 full-size propagated segmentations needs more memory than a
 one-core allocation provides.
 
+Some atlas pairs need close to the memory of a one-core allocation and
+slow down or fail there, so pair jobs get a little memory headroom even
+though MAPER itself runs single-threaded.
+
 Therefore:
 
-    registration/propagation -> 1 CPU
+    registration -> MAPER -threads 1; allocation per site profile
+                    (memory headroom)
+    cached propagation -> chunked, see section 11
     fusion -> memory-sufficient allocation
 
 Exact resource profiles belong in the Arrhenius site profile.

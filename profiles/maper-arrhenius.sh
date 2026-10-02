@@ -1,6 +1,13 @@
 # Empirically validated MAPER/Pincram settings on Arrhenius
 
-MAPER_REG_CPUS=1
+# Pairwise registration: keep MAPER at 1 thread, but allocate 2 CPUs for the
+# memory that comes with them (~3 GB per CPU). Some atlas pairs peak near
+# 2.8 GB (a28 under -notc) and at 1 CPU they slow down or are OOM-killed.
+# pre-neumra (0.75x0.75x1 mm targets): -notc pairs took 7.7 min mean at
+# 1 CPU (298 pairs) vs 3.7 min at 2 CPUs (29 pairs), i.e. about the same
+# CPU-hours at half the wall time; -tc3 pairs 5.2 min at 2 CPUs (60 pairs).
+# Small 2-CPU sample, on one cohort.
+MAPER_REG_CPUS=2
 MAPER_REG_THREADS=1
 
 # Fusion of 30 full-size propagated label images needs more memory.
