@@ -1,0 +1,120 @@
+1  0.20000 0.62745 0.17255 Hippocampus R
+2  0.12157 0.47059 0.70588 Hippocampus L
+3  0.69412 0.34902 0.15686 Amygdala R
+4  0.79216 0.69804 0.83922 Amygdala L
+5  0.99216 0.74902 0.43529 Anterior temporal lobe medial part R
+6  0.12157 0.47059 0.70588 Anterior temporal lobe medial part L
+7  0.41569 0.23922 0.60392 Anterior temporal lobe lateral part R
+8  0.89020 0.10196 0.10980 Anterior temporal lobe lateral part L
+9  0.69804 0.87451 0.54118 Parahippocampal & ambient gyri R
+10  1.00000 1.00000 0.60000 Parahippocampal & ambient gyri L
+11  1.00000 1.00000 0.60000 Superior temporal gyrus middle part R
+12  0.99216 0.74902 0.43529 Superior temporal gyrus middle part L
+13  0.89020 0.10196 0.10980 Middle & inferior temporal gyrus R
+14  0.20000 0.62745 0.17255 Middle & inferior temporal gyrus L
+15  0.79216 0.69804 0.83922 Fusiform gyrus R
+16  1.00000 0.49804 0.00000 Fusiform gyrus L
+17  1.00000 1.00000 0.60000 Cerebellum corpus medullare R
+18  0.69412 0.34902 0.15686 Cerebellum corpus medullare L
+19  0.79216 0.69804 0.83922 Pons
+20  0.20000 0.62745 0.17255 Insula posterior long gyrus L
+21  0.79216 0.69804 0.83922 Insula posterior long gyrus R
+22  0.89020 0.10196 0.10980 Lateral remainder occipital lobe L
+23  0.69412 0.34902 0.15686 Lateral remainder occipital lobe R
+24  0.41569 0.23922 0.60392 Anterior cingulate gyrus L
+25  1.00000 1.00000 0.60000 Anterior cingulate gyrus R
+26  0.69804 0.87451 0.54118 Posterior cingulate gyrus L
+27  0.98431 0.60392 0.60000 Posterior cingulate gyrus R
+28  0.69412 0.34902 0.15686 Middle frontal gyrus L
+29  1.00000 0.49804 0.00000 Middle frontal gyrus R
+30  0.79216 0.69804 0.83922 Posterior temporal lobe L
+31  1.00000 0.49804 0.00000 Posterior temporal lobe R
+32  1.00000 0.49804 0.00000 Angular gyrus L
+33  0.79216 0.69804 0.83922 Angular gyrus R
+34  0.12157 0.47059 0.70588 Caudate nucleus L
+35  0.98431 0.60392 0.60000 Caudate nucleus R
+36  1.00000 1.00000 0.60000 Nucleus accumbens L
+37  0.69412 0.34902 0.15686 Nucleus accumbens R
+38  1.00000 0.49804 0.00000 Putamen L
+39  0.69804 0.87451 0.54118 Putamen R
+40  0.89020 0.10196 0.10980 Thalamus L
+41  0.69412 0.34902 0.15686 Thalamus R
+42  0.79216 0.69804 0.83922 Pallidum L
+43  0.41569 0.23922 0.60392 Pallidum R
+44  0.20000 0.62745 0.17255 Corpus callosum
+45  0.69804 0.87451 0.54118 Lateral ventricle excluding temporal horn R
+46  0.41569 0.23922 0.60392 Lateral ventricle excluding temporal horn L
+47  0.12157 0.47059 0.70588 Lateral ventricle temporal horn R
+48  0.69412 0.34902 0.15686 Lateral ventricle temporal horn L
+49  0.79216 0.69804 0.83922 Third ventricle
+50  0.79216 0.69804 0.83922 Precentral gyrus L
+51  0.12157 0.47059 0.70588 Precentral gyrus R
+52  0.65098 0.80784 0.89020 Straight gyrus L
+53  0.41569 0.23922 0.60392 Straight gyrus R
+54  0.79216 0.69804 0.83922 Anterior orbital gyrus L
+55  0.98431 0.60392 0.60000 Anterior orbital gyrus R
+56  0.98431 0.60392 0.60000 Inferior frontal gyrus pars orbitalis L
+57  0.79216 0.69804 0.83922 Inferior frontal gyrus pars orbitalis R
+58  0.89020 0.10196 0.10980 Superior frontal gyrus L
+59  0.99216 0.74902 0.43529 Superior frontal gyrus R
+60  1.00000 1.00000 0.60000 Postcentral gyrus L
+61  0.89020 0.10196 0.10980 Postcentral gyrus R
+62  0.65098 0.80784 0.89020 Superior parietal gyrus L
+63  0.99216 0.74902 0.43529 Superior parietal gyrus R
+64  0.12157 0.47059 0.70588 Lingual gyrus L
+65  1.00000 1.00000 0.60000 Lingual gyrus R
+66  0.69804 0.87451 0.54118 Cuneus L
+67  0.98431 0.60392 0.60000 Cuneus R
+68  0.20000 0.62745 0.17255 Medial orbital gyrus L
+69  0.12157 0.47059 0.70588 Medial orbital gyrus R
+70  0.20000 0.62745 0.17255 Lateral orbital gyrus L
+71  0.12157 0.47059 0.70588 Lateral orbital gyrus R
+72  0.99216 0.74902 0.43529 Posterior orbital gyrus L
+73  0.89020 0.10196 0.10980 Posterior orbital gyrus R
+74  0.41569 0.23922 0.60392 Substantia nigra L
+75  0.20000 0.62745 0.17255 Substantia nigra R
+76  0.69804 0.87451 0.54118 Subgenual frontal cortex L
+77  0.79216 0.69804 0.83922 Subgenual frontal cortex R
+78  0.99216 0.74902 0.43529 Subcallosal area L
+79  1.00000 1.00000 0.60000 Subcallosal area R
+80  1.00000 0.49804 0.00000 Pre-subgenual frontal cortex L
+81  0.98431 0.60392 0.60000 Pre-subgenual frontal cortex R
+82  1.00000 0.49804 0.00000 Superior temporal gyrus anterior part L
+83  0.69804 0.87451 0.54118 Superior temporal gyrus anterior part R
+84  0.69412 0.34902 0.15686 Supramarginal gyrus L
+85  0.41569 0.23922 0.60392 Supramarginal gyrus R
+86  0.65098 0.80784 0.89020 Insula anterior short gyrus L
+87  0.69412 0.34902 0.15686 Insula anterior short gyrus R
+88  1.00000 1.00000 0.60000 Insula middle short gyrus L
+89  1.00000 1.00000 0.60000 Insula middle short gyrus R
+90  0.65098 0.80784 0.89020 Insula posterior short gyrus L
+91  0.99216 0.74902 0.43529 Insula posterior short gyrus R
+92  0.89020 0.10196 0.10980 Insula anterior pole L
+93  0.20000 0.62745 0.17255 Insula anterior pole R
+94  0.69804 0.87451 0.54118 Insula anterior long gyrus L
+95  1.00000 0.49804 0.00000 Insula anterior long gyrus R
+96  0.12157 0.47059 0.70588 Medulla oblongata
+97  0.99216 0.74902 0.43529 Midbrain
+98  0.41569 0.23922 0.60392 Fourth ventricle
+99  0.20000 0.62745 0.17255 Cerebral aqueduct
+100  0.98431 0.60392 0.60000 Remainder of cerebral white matter generated L
+101  0.65098 0.80784 0.89020 Remainder of cerebral white matter generated R
+102  0.69804 0.87451 0.54118 Cerebellum vermis
+103  1.00000 0.49804 0.00000 Mamillary body R
+104  0.65098 0.80784 0.89020 Mamillary body L
+105  0.98431 0.60392 0.60000 Inferior frontal gyrus pars opercularis R
+106  0.41569 0.23922 0.60392 Inferior frontal gyrus pars opercularis L
+107  0.99216 0.74902 0.43529 Inferior frontal gyrus pars triangularis R
+108  0.12157 0.47059 0.70588 Inferior frontal gyrus pars triangularis L
+109  0.65098 0.80784 0.89020 Cerebellum flocculonodular lobe R
+110  1.00000 1.00000 0.60000 Cerebellum flocculonodular lobe L
+111  0.98431 0.60392 0.60000 Cerebellum anterior lobe R
+112  0.20000 0.62745 0.17255 Cerebellum anterior lobe L
+113  0.99216 0.74902 0.43529 Cerebellum superior posterior lobe R
+114  0.99216 0.74902 0.43529 Cerebellum superior posterior lobe L
+115  0.20000 0.62745 0.17255 Cerebellum inferior posterior lobe R
+116  0.65098 0.80784 0.89020 Cerebellum inferior posterior lobe L
+117  0.98431 0.60392 0.60000 Subthalamic nucleus R
+118  0.69804 0.87451 0.54118 Subthalamic nucleus L
+119  0.41569 0.23922 0.60392 Piriform cortex R
+120  0.65098 0.80784 0.47059 Piriform cortex L

@@ -1,0 +1,433 @@
+labelno,name
+0,Background
+5,Anterior temporal lobe medial part R
+6,Anterior temporal lobe medial part L
+7,Anterior temporal lobe lateral part R
+8,Anterior temporal lobe lateral part L
+9,Parahippocampal & ambient gyri R
+10,Parahippocampal & ambient gyri L
+11,Superior temporal gyrus middle part R
+12,Superior temporal gyrus middle part L
+13,Middle & inferior temporal gyrus R
+14,Middle & inferior temporal gyrus L
+15,Fusiform gyrus R
+16,Fusiform gyrus L
+17,Cerebellum corpus medullare R
+18,Cerebellum corpus medullare L
+19,Pons
+22,Lateral remainder occipital lobe L
+23,Lateral remainder occipital lobe R
+28,Middle frontal gyrus L
+29,Middle frontal gyrus R
+30,Posterior temporal lobe L
+31,Posterior temporal lobe R
+32,Angular gyrus L
+33,Angular gyrus R
+49,Third ventricle
+50,Precentral gyrus L
+51,Precentral gyrus R
+52,Straight gyrus L
+53,Straight gyrus R
+54,Anterior orbital gyrus L
+55,Anterior orbital gyrus R
+56,Inferior frontal gyrus pars orbitalis L
+57,Inferior frontal gyrus pars orbitalis R
+58,Superior frontal gyrus L
+59,Superior frontal gyrus R
+60,Postcentral gyrus L
+61,Postcentral gyrus R
+62,Sup parietal gyrus L
+63,Superior parietal gyrus R
+64,Lingual gyrus L
+65,Lingual gyrus R
+66,Cuneus L
+67,Cuneus R
+68,Medial orbital gyrus L
+69,Medial orbital gyrus R
+70,Lateral orbital gyrus L
+71,Lateral orbital gyrus R
+72,Posterior orbital gyrus L
+73,Posterior orbital gyrus R
+82,Superior temporal gyrus anterior part L
+83,Superior temporal gyrus anterior part R
+84,Supramarginal gyrus L
+85,Supramarginal gyrus R
+93,Insula anterior pole R
+96,Medulla oblongata
+102,Cerebellum vermis
+103,Mamillary body R
+104,Mamillary body L
+105,Inferior frontal gyrus pars opercularis R
+106,Inferior frontal gyrus pars opercularis L
+107,Inferior frontal gyrus pars triangularis R
+108,Inferior frontal gyrus pars triangularis L
+109,Cerebellum flocculonodular lobe R
+110,Cerebellum flocculonodular lobe L
+111,Cerebellum anterior lobe R
+112,Cerebellum anterior lobe L
+113,Cerebellum superior posterior lobe R
+114,Cerebellum superior posterior lobe L
+115,Cerebellum inferior posterior lobe R
+116,Cerebellum inferior posterior lobe L
+121,Background
+122,Hippocampus R
+123,Hippocampus L
+124,Amygdala R
+125,Amygdala L
+126,Anterior temporal lobe medial part R
+127,Anterior temporal lobe medial part L
+128,Anterior temporal lobe lateral part R
+129,Anterior temporal lobe lateral part L
+130,Parahippocampal & ambient gyri R
+131,Parahippocampal & ambient gyri L
+132,Superior temporal gyrus middle part R
+133,Superior temporal gyrus middle part L
+134,Middle & inferior temporal gyrus R
+135,Middle & inferior temporal gyrus L
+136,Fusiform gyrus R
+137,Fusiform gyrus L
+138,Cerebellum corpus medullare R
+139,Cerebellum corpus medullare L
+140,Pons
+141,Insula posterior long gyrus L
+142,Insula posterior long gyrus R
+143,Lateral remainder occipital lobe L
+144,Lateral remainder occipital lobe R
+145,Anterior cingulate gyrus L
+146,Anterior cingulate gyrus R
+147,Posterior cingulate gyrus L
+148,Posterior cingulate gyrus R
+149,Middle frontal gyrus L
+150,Middle frontal gyrus R
+151,Posterior temporal lobe L
+152,Posterior temporal lobe R
+153,Angular gyrus L
+154,Angular gyrus R
+155,Caudate nucleus L
+156,Caudate nucleus R
+157,Nucleus accumbens L
+158,Nucleus accumbens R
+159,Putamen L
+160,Putamen R
+161,Thalamus L
+162,Thalamus R
+163,Pallidum L
+164,Pallidum R
+165,Corpus callosum
+166,Lateral ventricle excluding temporal horn R
+167,Lateral ventricle excluding temporal horn l
+168,Lateral ventricle temporal horn R
+169,Lateral ventricle temporal horn L
+170,Third ventricle
+171,Precentral gyrus L
+172,Precentral gyrus R
+173,Straight gyrus L
+174,Straight gyrus R
+175,Anterior orbital gyrus L
+176,Anterior orbital gyrus R
+177,Inferior frontal gyrus pars orbitalis L
+178,Inferior frontal gyrus pars orbitalis R
+179,Superior frontal gyrus L
+180,Superior frontal gyrus R
+181,Postcentral gyrus L
+182,Postcentral gyrus R
+183,Sup parietal gyrus L
+184,Superior parietal gyrus R
+185,Lingual gyrus L
+186,Lingual gyrus R
+187,Cuneus L
+188,Cuneus R
+189,Medial orbital gyrus L
+190,Medial orbital gyrus R
+191,Lateral orbital gyrus L
+192,Lateral orbital gyrus R
+193,Posterior orbital gyrus L
+194,Posterior orbital gyrus R
+195,Substantia nigra L
+196,Substantia nigra R
+197,Subgenual frontal cortex L
+198,Subgenual frontal cortex R
+199,Subcallosal area L
+200,Subcallosal area R
+201,Pre-subgenual frontal cortex L
+202,Pre-subgenual frontal cortex R
+203,Superior temporal gyrus anterior part L
+204,Superior temporal gyrus anterior part R
+205,Supramarginal gyrus L
+206,Supramarginal gyrus R
+207,Insula anterior short gyrus L
+208,Insula anterior short gyrus R
+209,Insula middle short gyrus L
+210,Insula middle short gyrus R
+211,Insula posterior short gyrus L
+212,Insula posterior short gyrus R
+213,Insula anterior pole L
+214,Insula anterior pole R
+215,Insula anterior long gyrus L
+216,Insula anterior long gyrus R
+217,Medulla oblongata
+218,Midbrain
+219,Fourth ventricle
+220,Cerebral aqueduct
+221,Remainder of cerebral white matter generated L
+222,Remainder of cerebral white matter generated R
+223,Cerebellum vermis
+224,Mamillary body R
+225,Mamillary body L
+226,Inferior frontal gyrus pars opercularis R
+227,Inferior frontal gyrus pars opercularis L
+228,Inferior frontal gyrus pars triangularis R
+229,Inferior frontal gyrus pars triangularis L
+230,Cerebellum flocculonodular lobe R
+231,Cerebellum flocculonodular lobe L
+232,Cerebellum anterior lobe R
+233,Cerebellum anterior lobe L
+234,Cerebellum superior posterior lobe R
+235,Cerebellum superior posterior lobe L
+236,Cerebellum inferior posterior lobe R
+237,Cerebellum inferior posterior lobe L
+238,Subthalamic nucleus R
+239,Subthalamic nucleus L
+240,Piriform cortex R
+241,Piriform cortex L
+242,Background
+243,Hippocampus R
+244,Hippocampus L
+245,Amygdala R
+246,Amygdala L
+247,Anterior temporal lobe medial part R
+248,Anterior temporal lobe medial part L
+249,Anterior temporal lobe lateral part R
+250,Anterior temporal lobe lateral part L
+251,Parahippocampal & ambient gyri R
+252,Parahippocampal & ambient gyri L
+253,Superior temporal gyrus middle part R
+254,Superior temporal gyrus middle part L
+255,Middle & inferior temporal gyrus R
+256,Middle & inferior temporal gyrus L
+257,Fusiform gyrus R
+258,Fusiform gyrus L
+259,Cerebellum corpus medullare R
+260,Cerebellum corpus medullare L
+261,Pons
+262,Insula posterior long gyrus L
+263,Insula posterior long gyrus R
+264,Lateral remainder occipital lobe L
+265,Lateral remainder occipital lobe R
+266,Anterior cingulate gyrus L
+267,Anterior cingulate gyrus R
+268,Posterior cingulate gyrus L
+269,Posterior cingulate gyrus R
+270,Middle frontal gyrus L
+271,Middle frontal gyrus R
+272,Posterior temporal lobe L
+273,Posterior temporal lobe R
+274,Angular gyrus L
+275,Angular gyrus R
+276,Caudate nucleus L
+277,Caudate nucleus R
+278,Nucleus accumbens L
+279,Nucleus accumbens R
+280,Putamen L
+281,Putamen R
+282,Thalamus L
+283,Thalamus R
+284,Pallidum L
+285,Pallidum R
+286,Corpus callosum
+287,Lateral ventricle excluding temporal horn R
+288,Lateral ventricle excluding temporal horn l
+289,Lateral ventricle temporal horn R
+290,Lateral ventricle temporal horn L
+291,Third ventricle
+292,Precentral gyrus L
+293,Precentral gyrus R
+294,Straight gyrus L
+295,Straight gyrus R
+296,Anterior orbital gyrus L
+297,Anterior orbital gyrus R
+298,Inferior frontal gyrus pars orbitalis L
+299,Inferior frontal gyrus pars orbitalis R
+300,Superior frontal gyrus L
+301,Superior frontal gyrus R
+302,Postcentral gyrus L
+303,Postcentral gyrus R
+304,Sup parietal gyrus L
+305,Superior parietal gyrus R
+306,Lingual gyrus L
+307,Lingual gyrus R
+308,Cuneus L
+309,Cuneus R
+310,Medial orbital gyrus L
+311,Medial orbital gyrus R
+312,Lateral orbital gyrus L
+313,Lateral orbital gyrus R
+314,Posterior orbital gyrus L
+315,Posterior orbital gyrus R
+316,Substantia nigra L
+317,Substantia nigra R
+318,Subgenual frontal cortex L
+319,Subgenual frontal cortex R
+320,Subcallosal area L
+321,Subcallosal area R
+322,Pre-subgenual frontal cortex L
+323,Pre-subgenual frontal cortex R
+324,Superior temporal gyrus anterior part L
+325,Superior temporal gyrus anterior part R
+326,Supramarginal gyrus L
+327,Supramarginal gyrus R
+328,Insula anterior short gyrus L
+329,Insula anterior short gyrus R
+330,Insula middle short gyrus L
+331,Insula middle short gyrus R
+332,Insula posterior short gyrus L
+333,Insula posterior short gyrus R
+334,Insula anterior pole L
+335,Insula anterior pole R
+336,Insula anterior long gyrus L
+337,Insula anterior long gyrus R
+338,Medulla oblongata
+339,Midbrain
+340,Fourth ventricle
+341,Cerebral aqueduct
+342,Remainder of cerebral white matter generated L
+343,Remainder of cerebral white matter generated R
+344,Cerebellum vermis
+345,Mamillary body R
+346,Mamillary body L
+347,Inferior frontal gyrus pars opercularis R
+348,Inferior frontal gyrus pars opercularis L
+349,Inferior frontal gyrus pars triangularis R
+350,Inferior frontal gyrus pars triangularis L
+351,Cerebellum flocculonodular lobe R
+352,Cerebellum flocculonodular lobe L
+353,Cerebellum anterior lobe R
+354,Cerebellum anterior lobe L
+355,Cerebellum superior posterior lobe R
+356,Cerebellum superior posterior lobe L
+357,Cerebellum inferior posterior lobe R
+358,Cerebellum inferior posterior lobe L
+359,Subthalamic nucleus R
+360,Subthalamic nucleus L
+361,Piriform cortex R
+362,Piriform cortex L
+363,Background
+364,Hippocampus R
+365,Hippocampus L
+366,Amygdala R
+367,Amygdala L
+368,Anterior temporal lobe medial part R
+369,Anterior temporal lobe medial part L
+370,Anterior temporal lobe lateral part R
+371,Anterior temporal lobe lateral part L
+372,Parahippocampal & ambient gyri R
+373,Parahippocampal & ambient gyri L
+374,Superior temporal gyrus middle part R
+375,Superior temporal gyrus middle part L
+376,Middle & inferior temporal gyrus R
+377,Middle & inferior temporal gyrus L
+378,Fusiform gyrus R
+379,Fusiform gyrus L
+380,Cerebellum corpus medullare R
+381,Cerebellum corpus medullare L
+382,Pons
+383,Insula posterior long gyrus L
+384,Insula posterior long gyrus R
+385,Lateral remainder occipital lobe L
+386,Lateral remainder occipital lobe R
+387,Anterior cingulate gyrus L
+388,Anterior cingulate gyrus R
+389,Posterior cingulate gyrus L
+390,Posterior cingulate gyrus R
+391,Middle frontal gyrus L
+392,Middle frontal gyrus R
+393,Posterior temporal lobe L
+394,Posterior temporal lobe R
+395,Angular gyrus L
+396,Angular gyrus R
+397,Caudate nucleus L
+398,Caudate nucleus R
+399,Nucleus accumbens L
+400,Nucleus accumbens R
+401,Putamen L
+402,Putamen R
+403,Thalamus L
+404,Thalamus R
+405,Pallidum L
+406,Pallidum R
+407,Corpus callosum
+408,Lateral ventricle excluding temporal horn R
+409,Lateral ventricle excluding temporal horn l
+410,Lateral ventricle temporal horn R
+411,Lateral ventricle temporal horn L
+412,Third ventricle
+413,Precentral gyrus L
+414,Precentral gyrus R
+415,Straight gyrus L
+416,Straight gyrus R
+417,Anterior orbital gyrus L
+418,Anterior orbital gyrus R
+419,Inferior frontal gyrus pars orbitalis L
+420,Inferior frontal gyrus pars orbitalis R
+421,Superior frontal gyrus L
+422,Superior frontal gyrus R
+423,Postcentral gyrus L
+424,Postcentral gyrus R
+425,Sup parietal gyrus L
+426,Superior parietal gyrus R
+427,Lingual gyrus L
+428,Lingual gyrus R
+429,Cuneus L
+430,Cuneus R
+431,Medial orbital gyrus L
+432,Medial orbital gyrus R
+433,Lateral orbital gyrus L
+434,Lateral orbital gyrus R
+435,Posterior orbital gyrus L
+436,Posterior orbital gyrus R
+437,Substantia nigra L
+438,Substantia nigra R
+439,Subgenual frontal cortex L
+440,Subgenual frontal cortex R
+441,Subcallosal area L
+442,Subcallosal area R
+443,Pre-subgenual frontal cortex L
+444,Pre-subgenual frontal cortex R
+445,Superior temporal gyrus anterior part L
+446,Superior temporal gyrus anterior part R
+447,Supramarginal gyrus L
+448,Supramarginal gyrus R
+449,Insula anterior short gyrus L
+450,Insula anterior short gyrus R
+451,Insula middle short gyrus L
+452,Insula middle short gyrus R
+453,Insula posterior short gyrus L
+454,Insula posterior short gyrus R
+455,Insula anterior pole L
+456,Insula anterior pole R
+457,Insula anterior long gyrus L
+458,Insula anterior long gyrus R
+459,Medulla oblongata
+460,Midbrain
+461,Fourth ventricle
+463,Remainder of cerebral white matter generated L
+464,Remainder of cerebral white matter generated R
+465,Cerebellum vermis
+466,Mamillary body R
+467,Mamillary body L
+468,Inferior frontal gyrus pars opercularis R
+469,Inferior frontal gyrus pars opercularis L
+470,Inferior frontal gyrus pars triangularis R
+471,Inferior frontal gyrus pars triangularis L
+472,Cerebellum flocculonodular lobe R
+473,Cerebellum flocculonodular lobe L
+474,Cerebellum anterior lobe R
+475,Cerebellum anterior lobe L
+476,Cerebellum superior posterior lobe R
+477,Cerebellum superior posterior lobe L
+478,Cerebellum inferior posterior lobe R
+479,Cerebellum inferior posterior lobe L
+480,Subthalamic nucleus R
+481,Subthalamic nucleus L
+482,Piriform cortex R
+483,Piriform cortex L

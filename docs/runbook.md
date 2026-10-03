@@ -277,6 +277,26 @@ Therefore:
 
 Exact resource profiles belong in the Arrhenius site profile.
 
+Keep fusion out of pair jobs: generate pair commands with `-atlasn` one
+higher than the number of sources, then rerun one source's command per
+target with the real `-atlasn` in a memory-sufficient allocation. MAPER
+reuses the saved pair outputs and only fuses. This avoids out-of-memory
+fusions and stale `fusion-semaphore-*` directories.
+
+### 10.1 Registration path: always use -tc3
+
+MAPER defaults to its tc2 path when neither `-tc2` nor `-tc3` is given.
+This default is a bug: tc3 is intended. The tc2 path's second stage
+registers the CSF map alone. On some targets (pre-neumra: 7 of 10) it
+contracts the superior cortex, and the final FFD stage cannot recover.
+Stage-by-stage replay (`scripts/maper-stagewise-*.sh`) localized the fault
+to that stage. `-tc3` registers CSF together with GM in that stage and does
+not show the problem. `-notc` also avoids it, but was slightly worse
+inferiorly (cerebellum).
+
+Pass `-tc3` explicitly in every launch list (append it after
+`launchlist-gen`) until MAPER's default is fixed.
+
 ## 11. Reusing registrations for additional label sets
 
 To transform another source label set after registrations already exist:
@@ -324,6 +344,28 @@ sform, dimension and code checks against the original input are
 unchanged. Record the exception in the cohort's `processing-history.md`
 and in collaborator-facing notes, since label boundaries are limited by
 the resampled grid.
+
+### 12.2 Volume deliverables
+
+When deliverables are regional volumes rather than images, no restoration
+is needed. Canonicalization, reorientation, centring and Fourier cropping
+preserve physical volume. Measure on the prepared grid, which avoids the
+nearest-neighbour step of 12.1.
+
+The established NeumRA format (`scripts/neumra-format-volumes.py`):
+
+- one row per value present in the MAPER tissue-separated file
+  (`labelno` = 121 * tissue class + seg120 label, 0-483; classes BG, CSF,
+  GM, WM);
+- `vol_mm3` and `vol_mm3_corr` in mm3;
+- ICV correction by proportional scaling:
+  `vol_mm3 / ICV * reference mean ICV`. The default reference is the 2024
+  NeumRA + IXI mean (1481696.297 mm3), which keeps new cohorts comparable
+  with earlier exports.
+- companion files: whole-brain tissue-class volumes and GM+WM / ICV ratios.
+
+Region names follow the 2023 NeumRA files (`reference/`), including two
+spelling quirks, so that new and old exports join cleanly.
 
 ## 13. Provenance and QC
 
