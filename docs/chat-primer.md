@@ -27,7 +27,13 @@ Important established findings:
 - cached-DOF propagation should be chunked rather than submitted as
   thousands of few-second Slurm jobs;
 - collaborator-facing images must be restored to original image geometry;
-  volume deliverables are measured on the prepared grid.
+  volume deliverables are measured on the prepared grid;
+- check for duplicated voxel data across IDs, and for a superior-slab contrast artifact (runbook 4.1);
+  N4 does not correct it, an experimental per-slice correction before N4 does;
+- Pincram is the default mask generator; if many masks are poor, HD-BET on CPU is the documented fallback
+  (runbook 5.1), and MAPER works from its masks;
+- HD-BET gives no ICV: estimate it as 1.0597 x HD-BET mask volume (runbook 12.3, ~2% error per scan);
+- left/right label checks need the PosNorm transform applied first.
 
 The previous cohort's full record is
 `/nobackup/proj/disk/metrimorphics0/shared/projects/pre-neumra/processing-history.md`.

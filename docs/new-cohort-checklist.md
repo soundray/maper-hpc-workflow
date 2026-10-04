@@ -8,6 +8,8 @@ Templates referred to below are in `templates/`, tools in `scripts/`.
 - Select representative normal, difficult, and largest-volume cases.
 - Audit qform/sform, orientation, voxel dimensions, and centring
   (`scripts/geometry-audit.py`).
+- Look for duplicated voxel data across IDs and for superior-slab contrast artifacts (sagittal montage,
+  `scripts/slab-step.py`; runbook 4.1). Record exceptions in the cohort QC flags.
 - Check for zero-filled reconstruction (sidecar acquisition vs reconstruction
   matrix; in-plane spectrum). If present, plan a Fourier crop to the acquired
   resolution (runbook 3.4) and record the restoration exception (12.1).
@@ -20,6 +22,8 @@ Templates referred to below are in `templates/`, tools in `scripts/`.
 - Run Pincram on representatives and visually inspect masks
   (`templates/pincram-array.sbatch`; work dir on project storage).
 - Batch Pincram only after representative acceptance.
+- If many Pincram masks are poor and N4 variants do not help, use the HD-BET fallback (runbook 5.1,
+  `templates/hdbet-array.sbatch`) and judge the masks visually.
 - Record Pincram visual QC for every target.
 - If masks underinclude superior cortex or residual bias is visible, use the
   two-stage N4 option (runbook section 4; `templates/n4-masked-array.sbatch`,
@@ -52,5 +56,7 @@ Templates referred to below are in `templates/`, tools in `scripts/`.
 - For volume deliverables: measure on the prepared grid (preparation is
   volume-preserving); use `scripts/neumra-format-volumes.py` for the NeumRA
   format and ICV correction (runbook 12.2).
+- With HD-BET masks there is no ICV mask: estimate it numerically (1.0597 x HD-BET volume,
+  `scripts/hdbet-icv-estimate.py`; runbook 12.3). Do not estimate it for clipped heads.
 - Create collaborator-facing deliverables with README and checksums.
 - Record exceptions and QC flags in the cohort manifest.

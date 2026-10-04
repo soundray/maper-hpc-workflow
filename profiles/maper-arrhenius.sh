@@ -21,6 +21,10 @@ MAPER_CACHED_PROPAGATION_CHUNK=100
 PINCRAM_CPUS=8
 PINCRAM_PAR=4
 
+# HD-BET fallback mask (runbook 5.1): CPU mode, -mode accurate -tta 0, about 45-65 s per image at 8 CPUs
+# (PARADE, 256x256x176 voxels at ~0.94x0.94x1 mm); memory is not a concern at this size.
+HDBET_CPUS=8
+
 # Peak Pincram work-dir usage (atlasn 100, -par 4) is ~75-81 GB per target
 # at 320x320x170 voxels (0.75x0.75x1 mm; pre-neumra). This exceeds the
 # node-local scratch of an 8-CPU allocation, so put the work dir on project

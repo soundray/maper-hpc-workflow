@@ -29,11 +29,13 @@ function libraries and Markdown operational documentation.
   (`PROJ`, `METS`, `MAPER_SIF`) are deliberately left to the user's
   environment rather than hardcoded here.
 - `scripts/` — standalone tools (geometry audit, Fourier crop, storage
-  flip, MAPER stage-by-stage replay, NeumRA-format volume export). Python
-  tools run inside the MAPER container. See `scripts/README.md`.
+  flip, MAPER stage-by-stage replay, NeumRA-format volume export, slab
+  artifact detection/correction, QC renderers, L/R check, HD-BET ICV
+  estimate). Python tools run inside the MAPER container. See
+  `scripts/README.md`.
 - `templates/` — cohort-agnostic Slurm job templates configured through
-  environment variables (prepare, Pincram, masked N4, PosNorm, MAPER
-  launch-list arrays). See `templates/README.md`.
+  environment variables (prepare, Pincram, HD-BET, masked N4, slab correction, PosNorm,
+  MAPER launch-list arrays). See `templates/README.md`.
 - `reference/` — small reference tables (Hammers r120 LUT, NeumRA region
   names) used by the scripts.
 - `docs/runbook.md` — the authoritative operational reference: software
@@ -81,7 +83,11 @@ function libraries and Markdown operational documentation.
   dimensions/codes verified against the original. Exception: if targets
   were resampled, labels are first nearest-neighbour resampled back to
   the centred native grid (runbook §12.1).
-- HD-BET is deliberately excluded from this workflow.
+- Pincram is the default mask generator. HD-BET (CPU, project venv, not in the container) is a documented
+  fallback for target masks when Pincram masks are poor (runbook 5.1). It gives no ICV, so the ICV is estimated
+  numerically as 1.0597 x HD-BET mask volume (runbook 12.3; about 2% error per scan, validated on two reference
+  sets only).
+- A superior-slab contrast artifact (runbook 4.1) is corrected by an experimental per-slice step before N4.
 - Pincram's checkpoint/archive (`-pickup`) machinery is legacy and not
   part of the production workflow; treat it as known cruft, not a
   pattern to extend.
