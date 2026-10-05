@@ -6,7 +6,7 @@ Run inside the MAPER container (needs nibabel/numpy), e.g. via `mcx` with 4 CPUs
 Inputs (one file per scan, named <iid>.nii.gz, all on the same grid):
   FINAL/seg120-tcsep/  MAPER tissue-separated labels (value = 121 * tc3crisp + seg120 label)
   FINAL/tc3crisp/      MAPER crisp tissue classes (1 CSF, 2 GM, 3 WM; 0 outside)
-  FINAL/icv/           ICV mask (non-zero = inside)
+  FINAL/icv/           ICV mask (non-zero = inside); not needed with --icv-table
   TARGETS              TSV with header: iid, pid, baseline, is_patient, has_followup
                        (TRUE/FALSE strings, written through unchanged)
 
@@ -17,6 +17,9 @@ Outputs in OUT:
   <set>-gmwm_ratios-<date>.csv.gz     set,iid,gmwm,icv,gmwm_ratio,pid,is_patient,is_followup,has_followup
 
 ICV correction (as in the 2024 NeumRA export): vol_mm3_corr = vol_mm3 / icv_mm3 * ICVMEAN.
+By default icv_mm3 is measured on FINAL/icv/<iid>.nii.gz. With --icv-table it is taken from a TSV instead (for targets
+without an ICV mask, e.g. numeric estimates from HD-BET masks, runbook 12.3). Header columns: an id column (iid,
+target_id or id) and the ICV as icv_mm3, or icv_est_mL / icv_mL (converted to mm3). Every target must have a row.
 The default ICVMEAN is the 2024 NeumRA + IXI reference mean, recovered from the 2024 export:
 vol_mm3_corr / vol_mm3 = 15.38343889550265 / 14.0625 for scan 31aug0907, whose ICV is 1354466.6 mm3.
 
@@ -34,11 +37,13 @@ CNAME = {0: 'BG', 1: 'CSF', 2: 'GM', 3: 'WM'}
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--final', required=True, help='directory with seg120-tcsep/, tc3crisp/, icv/')
+    ap.add_argument('--final', required=True, help='directory with seg120-tcsep/, tc3crisp/ and (unless --icv-table) icv/')
     ap.add_argument('--targets', required=True, help='TSV: iid, pid, baseline, is_patient, has_followup')
     ap.add_argument('--set', required=True, dest='setname', help='value of the "set" column, also used in file names')
     ap.add_argument('--date', required=True, help='date stamp for file names, e.g. 20261003')
     ap.add_argument('--out', required=True)
+    ap.add_argument('--icv-table', dest='icv_table', default=None,
+                    help='TSV with numeric ICV per target (id column iid|target_id|id; icv_mm3, icv_est_mL or icv_mL); replaces the ICV masks')
     ap.add_argument('--icvmean', type=float, default=ICVMEAN_2024, help='reference mean ICV in mm3 (default: 2024 NeumRA + IXI)')
     ap.add_argument('--names', default=os.path.join(REF, 'neumra-2023-region-names.csv'))
     ap.add_argument('--lut', default=os.path.join(REF, 'hammers-r120.lut'))
@@ -61,19 +66,40 @@ def main():
     def r(x):
         return repr(float(x))  # full double precision, like readr::write_csv
 
+    icv_tab = None
+    if a.icv_table:
+        icv_tab = {}
+        rows = list(csv.DictReader(open(a.icv_table), delimiter='\t'))
+        idc = next((c for c in ('iid', 'target_id', 'id') if rows and c in rows[0]), None)
+        vc = next(((c, k) for c, k in (('icv_mm3', 1.0), ('icv_est_mL', 1000.0), ('icv_mL', 1000.0)) if rows and c in rows[0]), None)
+        if idc is None or vc is None:
+            raise SystemExit(f'{a.icv_table}: need an id column (iid|target_id|id) and an ICV column (icv_mm3|icv_est_mL|icv_mL)')
+        for row in rows:
+            icv_tab[row[idc]] = float(row[vc[0]]) * vc[1]
+
     targets = list(csv.DictReader(open(a.targets), delimiter='\t'))
     vol_rows, tc3_rows, ratio_rows = [], [], []
     for t in targets:
         iid = t['iid']
         ti, T = load(f'{a.final}/seg120-tcsep/{iid}.nii.gz')
         ci, C = load(f'{a.final}/tc3crisp/{iid}.nii.gz')
-        ii, I = load(f'{a.final}/icv/{iid}.nii.gz')
-        for other in (ci, ii):
+        others = [ci]
+        if icv_tab is None:
+            ii, I = load(f'{a.final}/icv/{iid}.nii.gz')
+            others.append(ii)
+        for other in others:
             assert other.shape[:3] == ti.shape[:3] and np.allclose(other.get_qform(), ti.get_qform(), atol=1e-4), iid
         assert np.array_equal(C, T // 121), f'{iid}: tc3crisp != tcsep class part'
         # header zooms are float32 (e.g. 0.75 stored as 0.75000006); round to recover the nominal voxel size
         vox = float(np.prod(np.round(np.asarray(ti.header.get_zooms()[:3], dtype=np.float64), 6)))
-        icv = (I > 0).sum() * vox
+        if icv_tab is None:
+            icv = (I > 0).sum() * vox
+        else:
+            if iid not in icv_tab:
+                raise SystemExit(f'{a.icv_table}: no ICV for target {iid}')
+            icv = icv_tab[iid]
+            if not icv > 0:
+                raise SystemExit(f'{a.icv_table}: non-positive ICV for target {iid}')
         vals, cnt = np.unique(T, return_counts=True)
         assert vals.min() >= 0 and vals.max() <= 483, iid
         for v, n in zip(vals, cnt):
@@ -99,7 +125,7 @@ def main():
     write(f'vols_{a.setname}-{a.date}.csv.gz', ['set', 'pid', 'iid', 'baseline', 'cclass', 'name', 'labelno', 'vol_mm3', 'vol_mm3_corr'], vol_rows)
     write(f'{a.setname}-tc3-volumes-{a.date}.csv.gz', ['set', 'iid', 'label_no', 'cclass', 'vol_mm3', 'vol_mm3_corr'], tc3_rows)
     write(f'{a.setname}-gmwm_ratios-{a.date}.csv.gz', ['set', 'iid', 'gmwm', 'icv', 'gmwm_ratio', 'pid', 'is_patient', 'is_followup', 'has_followup'], ratio_rows)
-    print(f'icvmean {a.icvmean:.4f} mm3; rows: vols {len(vol_rows)}, tc3 {len(tc3_rows)}, ratios {len(ratio_rows)}')
+    print(f'icvmean {a.icvmean:.4f} mm3; ICV from {"table " + a.icv_table if icv_tab is not None else "masks"}; rows: vols {len(vol_rows)}, tc3 {len(tc3_rows)}, ratios {len(ratio_rows)}')
 
 
 if __name__ == '__main__':

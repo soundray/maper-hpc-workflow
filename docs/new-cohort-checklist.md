@@ -57,6 +57,7 @@ Templates referred to below are in `templates/`, tools in `scripts/`.
   volume-preserving); use `scripts/neumra-format-volumes.py` for the NeumRA
   format and ICV correction (runbook 12.2).
 - With HD-BET masks there is no ICV mask: estimate it numerically (1.0597 x HD-BET volume,
-  `scripts/hdbet-icv-estimate.py`; runbook 12.3). Do not estimate it for clipped heads.
+  `scripts/hdbet-icv-estimate.py`; runbook 12.3; feed the table to `neumra-format-volumes.py --icv-table`). Do not
+  estimate it for clipped heads.
 - Create collaborator-facing deliverables with README and checksums.
 - Record exceptions and QC flags in the cohort manifest.

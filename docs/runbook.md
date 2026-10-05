@@ -420,7 +420,9 @@ per scan. The two means differ by 0.3% (t = 1.0).
   0.074, correlation 0.69, against the reference 1.058).
 - Validated on older (MCI) and mixed-age healthy sets only; the brain/ICV ratio depends on CSF space. Check it
   with `scripts/icv-ratio-set.py` when manual ICVs exist for a new population.
-- `scripts/neumra-format-volumes.py` takes ICV from masks. Numeric ICV input is not implemented (section 14).
+- `scripts/neumra-format-volumes.py --icv-table <tsv>` takes the numeric ICV instead of ICV masks (TSV with an id
+  column and `icv_mm3`, `icv_est_mL` or `icv_mL`; the output `icv` column then holds the estimate). Tested: without
+  the option, and with a table of mask-derived ICVs, it reproduces the pre-neumra deliverables byte for byte.
 
 ## 13. Provenance and QC
 
@@ -455,12 +457,10 @@ Known areas for future refactoring include:
 - improved parallel scheduling;
 - Slurm-native decomposition of embarrassingly parallel stages.
 
-Also open:
-
-- `scripts/neumra-format-volumes.py` reads ICV masks; it needs an option to take numeric ICV estimates
-  (section 12.3) from a table.
-- The slab correction (4.1) is validated on one cohort only.
-- The HD-BET ICV factor is validated on two reference sets only (12.3).
-
 These changes should be developed and tested separately from production
 cohort processing.
+
+Also open:
+
+- The slab correction (4.1) is validated on one cohort only.
+- The HD-BET ICV factor is validated on two reference sets only (12.3).
