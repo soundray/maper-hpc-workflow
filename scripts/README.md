@@ -17,7 +17,7 @@ loading several 0.75 mm volumes) or a Slurm job for anything heavier.
 | slab-step.py | detect the superior-slab contrast artifact (runbook 4.1) from the margin background along S. `"id<TAB>path"` ... |
 | slab-reference.py | reference brain-signal profile by depth below the vertex, from unaffected images. `out "id<TAB>path"` ... |
 | slab-correct.py | experimental per-slice slab correction (before N4). `in out slice-log.tsv [reference.tsv]` |
-| sagittal-slices.py, render-montage.py | head-centred sagittal tiles (container) and labelled montage sheets (host, PIL) for visual screening |
+| sagittal-slices.py, render-montage.py | head-centred sagittal tiles (container; prints tile width and height) and labelled montage sheets (host, PIL; pass `W H` for grids other than 256x176) for visual screening |
 | mask-qc-tiles.py, render-maskqc.py | mask contour QC rows (container) and sheets (host, PIL); `MASKTPL` selects other mask paths (pass as `APPTAINERENV_MASKTPL`, `mcx` uses `--cleanenv`) |
 | seg-qc-tiles.py | MAPER label overlay QC rows (render with render-maskqc.py) |
 | mask-volumes.py, hdbet-volumes.py | mask volumes and extents (Pincram parenchyma/icv; HD-BET masks with grid check) |
