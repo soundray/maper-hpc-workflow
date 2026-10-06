@@ -11,8 +11,8 @@ loading several 0.75 mm volumes) or a Slurm job for anything heavier.
 | flip-storage-x.py | flip voxel storage along axis 0 with compensating affine (LAS <-> RAS, no interpolation) |
 | maper-stagewise-tc2-notc.sh | replay MAPER regprop (default tc2 and -notc paths) for one cache pair, keeping every stage's DOF and transformed labels |
 | maper-stagewise-tc3.sh | same for the -tc3 path |
-| neumra-format-volumes.py | regional volumes in the 2024 NeumRA deliverable format, incl. ICV correction (see `--help`); ICV from masks, or from a numeric table with `--icv-table` (runbook 12.3) |
-| region-volumes.py | per-region seg120 volumes, total and per tissue (CSF/GM/WM/unclassified), raw (ml) and as a fraction of ICV; ICV from masks or `--icv-table`. `--final DIR --targets TSV --out DIR` |
+| neumra-format-volumes.py | regional volumes in the 2024 NeumRA deliverable format, incl. ICV correction (see `--help`); ICV from masks, or from a numeric table with `--icv-table` (runbook 12.3); `--extra-columns` appends targets-table columns (e.g. `is_paired,pair_status`) |
+| region-volumes.py | per-region seg120 volumes, total and per tissue (CSF/GM/WM/unclassified), raw (ml) and as a fraction of ICV; ICV from masks or `--icv-table`; `--extra-columns` appends targets columns to the long TSV. `--final DIR --targets TSV --out DIR` |
 | inplane-spectrum.py | in-plane power spectrum per image, to check for zero-filled reconstruction (runbook 3.4). `"id<TAB>path"` ... |
 | slab-step.py | detect the superior-slab contrast artifact (runbook 4.1) from the margin background along S. `"id<TAB>path"` ... |
 | slab-reference.py | reference brain-signal profile by depth below the vertex, from unaffected images. `out "id<TAB>path"` ... |

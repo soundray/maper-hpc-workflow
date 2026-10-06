@@ -426,6 +426,9 @@ per scan. The two means differ by 0.3% (t = 1.0).
 - `scripts/neumra-format-volumes.py --icv-table <tsv>` and `scripts/region-volumes.py --icv-table <tsv>` take the numeric ICV instead of ICV masks (TSV with an id
   column and `icv_mm3`, `icv_est_mL` or `icv_mL`; the output `icv` column then holds the estimate). Tested: without
   the option, and with a table of mask-derived ICVs, it reproduces the pre-neumra deliverables byte for byte.
+  Cohorts with unpaired scans: add `is_paired` and `pair_status` columns to the targets TSV and pass
+  `--extra-columns is_paired,pair_status` (appended to every row of the three files; without the option the files
+  are unchanged); `region-volumes.py --extra-columns` does the same for its long TSV.
 
 ## 13. Provenance and QC
 

@@ -23,6 +23,9 @@ target_id or id) and the ICV as icv_mm3, or icv_est_mL / icv_mL (converted to mm
 The default ICVMEAN is the 2024 NeumRA + IXI reference mean, recovered from the 2024 export:
 vol_mm3_corr / vol_mm3 = 15.38343889550265 / 14.0625 for scan 31aug0907, whose ICV is 1354466.6 mm3.
 
+--extra-columns A,B,... appends those columns of the TARGETS TSV (values written through unchanged) to every row of the three
+output files, e.g. is_paired,pair_status for cohorts with unpaired scans. Without it the files are exactly as before.
+
 Region names come from the 2023/2024 NeumRA files where available (keeps their spellings for joins),
 otherwise from the Hammers r120 LUT. Region 0 is "Background" in every class.
 """
@@ -44,6 +47,8 @@ def main():
     ap.add_argument('--out', required=True)
     ap.add_argument('--icv-table', dest='icv_table', default=None,
                     help='TSV with numeric ICV per target (id column iid|target_id|id; icv_mm3, icv_est_mL or icv_mL); replaces the ICV masks')
+    ap.add_argument('--extra-columns', dest='extra', default='',
+                    help='comma-separated TARGETS columns to append to every output row (default: none)')
     ap.add_argument('--icvmean', type=float, default=ICVMEAN_2024, help='reference mean ICV in mm3 (default: 2024 NeumRA + IXI)')
     ap.add_argument('--names', default=os.path.join(REF, 'neumra-2023-region-names.csv'))
     ap.add_argument('--lut', default=os.path.join(REF, 'hammers-r120.lut'))
@@ -78,6 +83,10 @@ def main():
             icv_tab[row[idc]] = float(row[vc[0]]) * vc[1]
 
     targets = list(csv.DictReader(open(a.targets), delimiter='\t'))
+    extra = [c for c in a.extra.split(',') if c]
+    for c in extra:
+        if not targets or c not in targets[0]:
+            raise SystemExit(f'{a.targets}: no column {c} for --extra-columns')
     vol_rows, tc3_rows, ratio_rows = [], [], []
     for t in targets:
         iid = t['iid']
@@ -105,15 +114,15 @@ def main():
         for v, n in zip(vals, cnt):
             vol = n * vox
             vol_rows.append([a.setname, t['pid'], iid, t['baseline'], CNAME[v // 121], region_name(v), int(v),
-                             r(vol), r(vol / icv * a.icvmean)])
+                             r(vol), r(vol / icv * a.icvmean)] + [t[c] for c in extra])
         cv, cc = np.unique(C, return_counts=True)
         cvol = dict(zip(cv.tolist(), (cc * vox).tolist()))
         for lab in (1, 2, 3):
             vol = cvol.get(lab, 0.0)
-            tc3_rows.append([a.setname, iid, lab, CNAME[lab], r(vol), r(vol / icv * a.icvmean)])
+            tc3_rows.append([a.setname, iid, lab, CNAME[lab], r(vol), r(vol / icv * a.icvmean)] + [t[c] for c in extra])
         gmwm = cvol.get(2, 0.0) + cvol.get(3, 0.0)
         is_followup = 'FALSE' if t['baseline'] == 'TRUE' else 'TRUE'
-        ratio_rows.append([a.setname, iid, r(gmwm), r(icv), r(gmwm / icv), t['pid'], t['is_patient'], is_followup, t['has_followup']])
+        ratio_rows.append([a.setname, iid, r(gmwm), r(icv), r(gmwm / icv), t['pid'], t['is_patient'], is_followup, t['has_followup']] + [t[c] for c in extra])
 
     def write(name, hdr, rows):
         with gzip.open(os.path.join(a.out, name), 'wt', newline='') as fh:
@@ -122,9 +131,9 @@ def main():
             w.writerows(rows)
 
     os.makedirs(a.out, exist_ok=True)
-    write(f'vols_{a.setname}-{a.date}.csv.gz', ['set', 'pid', 'iid', 'baseline', 'cclass', 'name', 'labelno', 'vol_mm3', 'vol_mm3_corr'], vol_rows)
-    write(f'{a.setname}-tc3-volumes-{a.date}.csv.gz', ['set', 'iid', 'label_no', 'cclass', 'vol_mm3', 'vol_mm3_corr'], tc3_rows)
-    write(f'{a.setname}-gmwm_ratios-{a.date}.csv.gz', ['set', 'iid', 'gmwm', 'icv', 'gmwm_ratio', 'pid', 'is_patient', 'is_followup', 'has_followup'], ratio_rows)
+    write(f'vols_{a.setname}-{a.date}.csv.gz', ['set', 'pid', 'iid', 'baseline', 'cclass', 'name', 'labelno', 'vol_mm3', 'vol_mm3_corr'] + extra, vol_rows)
+    write(f'{a.setname}-tc3-volumes-{a.date}.csv.gz', ['set', 'iid', 'label_no', 'cclass', 'vol_mm3', 'vol_mm3_corr'] + extra, tc3_rows)
+    write(f'{a.setname}-gmwm_ratios-{a.date}.csv.gz', ['set', 'iid', 'gmwm', 'icv', 'gmwm_ratio', 'pid', 'is_patient', 'is_followup', 'has_followup'] + extra, ratio_rows)
     print(f'icvmean {a.icvmean:.4f} mm3; ICV from {"table " + a.icv_table if icv_tab is not None else "masks"}; rows: vols {len(vol_rows)}, tc3 {len(tc3_rows)}, ratios {len(ratio_rows)}')
 
 

@@ -15,6 +15,8 @@ Outputs in OUT:
   seg120-volumes-raw-ml.csv, seg120-volumes-icv-fraction.csv                 per-region totals, one row per target
   seg120-tcsep-volumes-raw-ml.csv, seg120-tcsep-volumes-icv-fraction.csv     per region and tissue
   seg120-volumes-long.tsv                                                    target_id,label,region,tissue,volume_ml,icv_ml,fraction_of_icv
+--extra-columns A,B,... appends those TARGETS columns (e.g. pid,baseline,is_paired,pair_status) to every row of the long TSV
+only (the wide CSVs are unchanged).
 Volumes are measured on the prepared grid (volume-preserving preparation; no restoration resampling). Region names from the
 Hammers r120 LUT. Checks: the tcsep label part equals the labels; tissue parts sum to the totals for every region.
 """
@@ -30,6 +32,7 @@ def main():
     ap.add_argument('--final', required=True, help='directory with seg120/, seg120-tcsep/ and (unless --icv-table) icv/')
     ap.add_argument('--targets', required=True, help='TSV with a column iid')
     ap.add_argument('--out', required=True)
+    ap.add_argument('--extra-columns', dest='extra', default='', help='comma-separated TARGETS columns appended to the long TSV rows')
     ap.add_argument('--icv-table', dest='icv_table', default=None, help='numeric ICV TSV (id column; icv_mm3|icv_est_mL|icv_mL) instead of ICV masks')
     ap.add_argument('--lut', default=os.path.join(HERE, '..', 'reference', 'hammers-r120.lut'))
     a = ap.parse_args()
@@ -40,7 +43,13 @@ def main():
         if f:
             names[int(f[0])] = ' '.join(f[4:])
     assert sorted(names) == list(range(1, 121)), 'LUT must define labels 1-120'
-    ids = [r['iid'] for r in csv.DictReader(open(a.targets), delimiter='\t')]
+    trows = list(csv.DictReader(open(a.targets), delimiter='\t'))
+    ids = [r['iid'] for r in trows]
+    tdict = {r['iid']: r for r in trows}
+    extra = [c for c in a.extra.split(',') if c]
+    for c in extra:
+        if not trows or c not in trows[0]:
+            raise SystemExit(f'{a.targets}: no column {c} for --extra-columns')
 
     icv_tab = None
     if a.icv_table:
@@ -79,14 +88,14 @@ def main():
         for lab in range(1, 121):
             assert abs(sum(by[c][lab] for c in TISSUE) - tot[lab]) < 1e-9
             for tis, vol in [('all', tot[lab])] + [(TISSUE[c], by[c][lab]) for c in (1, 2, 3, 0)]:
-                long_rows.append([t, lab, names[lab], tis, f'{vol:.4f}', f'{icv:.4f}', f'{vol / icv:.7f}'])
+                long_rows.append([t, lab, names[lab], tis, f'{vol:.4f}', f'{icv:.4f}', f'{vol / icv:.7f}'] + [tdict[t][c] for c in extra])
                 wide.setdefault(t, {})[(lab, tis)] = (vol, vol / icv)
         wide[t]['_icv'] = icv
 
     os.makedirs(a.out, exist_ok=True)
     with open(f'{a.out}/seg120-volumes-long.tsv', 'w', newline='') as fh:
         w = csv.writer(fh, delimiter='\t')
-        w.writerow(['target_id', 'label', 'region', 'tissue', 'volume_ml', 'icv_ml', 'fraction_of_icv'])
+        w.writerow(['target_id', 'label', 'region', 'tissue', 'volume_ml', 'icv_ml', 'fraction_of_icv'] + extra)
         w.writerows(long_rows)
 
     def write_wide(fname, tissues, idx):
