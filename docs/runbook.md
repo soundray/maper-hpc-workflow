@@ -388,6 +388,9 @@ is needed. Canonicalization, reorientation, centring and Fourier cropping
 preserve physical volume. Measure on the prepared grid, which avoids the
 nearest-neighbour step of 12.1.
 
+Per-region volumes before and after tc3 separation, raw (ml) and as a fraction of ICV, wide and long formats:
+`scripts/region-volumes.py` (ICV from masks, or numeric with `--icv-table`, 12.3).
+
 The established NeumRA format (`scripts/neumra-format-volumes.py`):
 
 - one row per value present in the MAPER tissue-separated file
@@ -420,7 +423,7 @@ per scan. The two means differ by 0.3% (t = 1.0).
   0.074, correlation 0.69, against the reference 1.058).
 - Validated on older (MCI) and mixed-age healthy sets only; the brain/ICV ratio depends on CSF space. Check it
   with `scripts/icv-ratio-set.py` when manual ICVs exist for a new population.
-- `scripts/neumra-format-volumes.py --icv-table <tsv>` takes the numeric ICV instead of ICV masks (TSV with an id
+- `scripts/neumra-format-volumes.py --icv-table <tsv>` and `scripts/region-volumes.py --icv-table <tsv>` take the numeric ICV instead of ICV masks (TSV with an id
   column and `icv_mm3`, `icv_est_mL` or `icv_mL`; the output `icv` column then holds the estimate). Tested: without
   the option, and with a table of mask-derived ICVs, it reproduces the pre-neumra deliverables byte for byte.
 

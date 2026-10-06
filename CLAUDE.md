@@ -29,7 +29,7 @@ function libraries and Markdown operational documentation.
   (`PROJ`, `METS`, `MAPER_SIF`) are deliberately left to the user's
   environment rather than hardcoded here.
 - `scripts/` — standalone tools (geometry audit, Fourier crop, storage
-  flip, MAPER stage-by-stage replay, NeumRA-format volume export, slab
+  flip, MAPER stage-by-stage replay, regional volume export (NeumRA format, region-volumes), slab
   artifact detection/correction, QC renderers, L/R check, HD-BET ICV
   estimate). Python tools run inside the MAPER container. See
   `scripts/README.md`.

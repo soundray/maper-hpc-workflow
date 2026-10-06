@@ -59,5 +59,7 @@ Templates referred to below are in `templates/`, tools in `scripts/`.
 - With HD-BET masks there is no ICV mask: estimate it numerically (1.0597 x HD-BET volume,
   `scripts/hdbet-icv-estimate.py`; runbook 12.3; feed the table to `neumra-format-volumes.py --icv-table`). Do not
   estimate it for clipped heads.
+- Region volumes: `scripts/region-volumes.py` and `scripts/neumra-format-volumes.py`; verify that every scan's rows
+  sum to the field of view and that the two tools agree.
 - Create collaborator-facing deliverables with README and checksums.
 - Record exceptions and QC flags in the cohort manifest.
