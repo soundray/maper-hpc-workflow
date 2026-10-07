@@ -227,10 +227,11 @@ instead (PARADE: about 30% poor Pincram masks, mostly overinclusion; no-N4 never
 2 of 11, worse in 6; HD-BET masks of all 82 images were accepted on visual QC, and MAPER (-tc3) ran correctly from
 them). Pincram's "parenchyma" mask also contains central CSF, so the two mask types are similar in kind.
 
-- Install per project, outside the container: venv with CPU `torch` (PyTorch CPU wheel index) and `hd-bet` 1.1
-  (PyPI). The five weight files (Zenodo record 2540695) download into `~/hd-bet_params` on first use; fetch
-  them once on the login node (`HD_BET.utils.maybe_download_parameters(fold)`, folds 0-4) so batch jobs need no
-  network, and record their sha256 and the versions in the cohort provenance.
+- Shared install, outside the container: `apps/hdbet/hd-bet-1.1` (venv with CPU `torch` 2.8.0 and `hd-bet` 1.1; the
+  five weight files from Zenodo record 2540695 in `params/`, sha256 in `params/SHA256SUMS`; `module load hdbet/hd-bet-1.1`
+  from `apps/modulefiles`). Batch jobs need no network. Weights are located through `HD_BET_PARAMS` (one local patch to
+  `HD_BET/paths.py`, see its README; default remains `~/hd-bet_params`). Record the versions and weight checksums in the
+  cohort provenance. Do not move or copy the venv (absolute paths); rebuild it from `requirements-frozen.txt`.
 - Run `templates/hdbet-array.sbatch`: CPU, `-mode accurate -tta 0`, input = the same T1 Pincram would get (N4,
   and slab correction if used). About 45-65 s per image on 8 CPUs. `brain_mask.nii.gz` is uint8 0/1 on the input
   grid.

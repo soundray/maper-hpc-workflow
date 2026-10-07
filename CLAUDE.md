@@ -83,7 +83,7 @@ function libraries and Markdown operational documentation.
   dimensions/codes verified against the original. Exception: if targets
   were resampled, labels are first nearest-neighbour resampled back to
   the centred native grid (runbook §12.1).
-- Pincram is the default mask generator. HD-BET (CPU, project venv, not in the container) is a documented
+- Pincram is the default mask generator. HD-BET (CPU, shared install `apps/hdbet/hd-bet-1.1`, not in the container) is a documented
   fallback for target masks when Pincram masks are poor (runbook 5.1). It gives no ICV, so the ICV is estimated
   numerically as 1.0597 x HD-BET mask volume (runbook 12.3; about 2% error per scan, validated on two reference
   sets only).
