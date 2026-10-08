@@ -214,6 +214,15 @@ Pincram is only partly parallel. High `-par` values can increase
 allocated CPU-hours without proportional speedup and can increase memory
 and scratch pressure.
 
+`-par` and `-threads` (pincram 20db801 or later): `-par` is the number of
+registrations running at the same time, `-threads` the threads of each;
+the product should match the allocated CPUs. Production: `-par 4 -threads 2`
+on 8 CPUs (`profiles/maper-arrhenius.sh`). Up to pincram 633b892, `-par N`
+also gave each registration N threads (the former `-par 4` ran 4 x 4 threads
+on 8 CPUs), and `-threads` did not exist. Each run's log starts with
+`pincram version <sha>`; check it when comparing timings or masks across
+container versions.
+
 The Arrhenius implementation exposes substantial node-local scratch
 through CPU allocation.
 

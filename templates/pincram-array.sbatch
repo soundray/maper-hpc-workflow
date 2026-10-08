@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --time=03:00:00
 # Required: ROOT, IN_GEN (prepared generation holding T1.nii.gz), OUT_GEN (pincram generation), LIST
-# Settings per profiles/maper-arrhenius.sh: levels 3, atlasn 100, -par 4, 8 CPUs. Work dir on project storage
+# Settings per profiles/maper-arrhenius.sh: levels 3, atlasn 100, -par 4 -threads 2 (pincram 20db801 or later), 8 CPUs. Work dir on project storage
 # (node-local scratch of 8 CPUs is too small at ~0.75 mm: ~80 GB peak).
 set -euo pipefail
 : "${ROOT:?}" "${IN_GEN:?}" "${OUT_GEN:?}" "${LIST:?}"
@@ -22,4 +22,5 @@ mon=$!
 trap 'kill $mon 2>/dev/null || true; echo "peak work dir usage (MB): $(cat "$work.peak-MB" 2>/dev/null)"; rm -rf "$work" "$work.peak-MB"' EXIT
 echo "target: $id  input: $input  result: $result  host: $HOSTNAME"
 srun apptainer exec --cleanenv --bind "$METS:$METS" --env TMPDIR="$work" "$MAPER_SIF" \
-  pincram "$input" -atlas "$ATLAS" -result "$result" -workdir "$work" -levels 3 -atlasn 100 -par 4
+  pincram "$input" -atlas "$ATLAS" -result "$result" -workdir "$work" -levels 3 -atlasn 100 \
+    -par "${PINCRAM_PAR:-4}" -threads "${PINCRAM_THREADS:-2}"

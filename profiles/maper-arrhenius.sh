@@ -17,9 +17,14 @@ MAPER_FUSION_CPUS=8
 # many commands into one Slurm allocation.
 MAPER_CACHED_PROPAGATION_CHUNK=100
 
-# Current conservative Pincram setting.
+# Current conservative Pincram setting: 4 concurrent registrations with 2 threads each. Needs
+# pincram 20db801 or later (in the container from the rebuild after 633b892), where -par is the
+# number of concurrent registrations only and -threads the threads of each. Up to 633b892, -par N
+# also set N threads per registration, so the former "-par 4" ran 4 x 4 threads on 8 CPUs; older
+# pincram rejects -threads, so the template fails at once against an old container.
 PINCRAM_CPUS=8
 PINCRAM_PAR=4
+PINCRAM_THREADS=2
 
 # HD-BET fallback mask (runbook 5.1): CPU mode, -mode accurate -tta 0, about 45-65 s per image at 8 CPUs
 # (PARADE, 256x256x176 voxels at ~0.94x0.94x1 mm); memory is not a concern at this size.
