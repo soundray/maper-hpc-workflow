@@ -10,7 +10,7 @@
 # stage 1), OUT_GEN (new prepared generation), LIST. Copies 03-centred [and 04-resampled] into OUT_GEN.
 set -euo pipefail
 : "${ROOT:?}" "${SRC_GEN:?}" "${MASK_GEN:?}" "${OUT_GEN:?}" "${LIST:?}"
-METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper/maper.sif}
+METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper-sif/maper.sif}
 id=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$LIST" | cut -f1); [[ -n "${id:-}" ]] || { echo "No target" >&2; exit 1; }
 src="$ROOT/prepared/$SRC_GEN/$id"; out="$ROOT/prepared/$OUT_GEN/$id"
 [[ ! -e "$out/T1.nii.gz" ]] || { echo "Output exists: $out/T1.nii.gz" >&2; exit 1; }

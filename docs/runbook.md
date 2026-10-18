@@ -13,10 +13,10 @@ cohort project tree.
 
 MAPER is run from:
 
-    /nobackup/proj/disk/metrimorphics0/apps/maper/maper.sif
+    /nobackup/proj/disk/metrimorphics0/apps/maper-sif/maper.sif
 
 The container contains MAPER, Pincram, PosNorm, MIRTK, NiftySeg, ANTs,
-NiBabel/NumPy, and the local NIfTI geometry utilities.
+NiBabel/NumPy/SciPy, and the local NIfTI geometry utilities.
 
 MIRTK is the registration backend.
 

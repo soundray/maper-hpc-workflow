@@ -10,7 +10,7 @@
 # (node-local scratch of 8 CPUs is too small at ~0.75 mm: ~80 GB peak).
 set -euo pipefail
 : "${ROOT:?}" "${IN_GEN:?}" "${OUT_GEN:?}" "${LIST:?}"
-METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper/maper.sif}
+METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper-sif/maper.sif}
 ATLAS=${PINCRAM_ATLAS:-$METS/shared/reference/ixi-pincram-atlas-n100-dm}
 id=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$LIST" | cut -f1); [[ -n "${id:-}" ]] || { echo "No target" >&2; exit 1; }
 input="$ROOT/prepared/$IN_GEN/$id/T1.nii.gz"; result="$ROOT/pincram/$OUT_GEN/${id}-n100"

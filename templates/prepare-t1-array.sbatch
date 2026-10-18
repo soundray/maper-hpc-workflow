@@ -10,7 +10,7 @@
 # Optional: N4_MODE=none to stop before N4 (e.g. when only the masked second N4 will be used)
 set -euo pipefail
 : "${ROOT:?}" "${GEN:?}" "${LIST:?}"
-METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper/maper.sif}
+METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper-sif/maper.sif}
 TOOLS=${TOOLS:-$METS/apps/maper-hpc-workflow/scripts}
 IFS=$'\t' read -r id src_rel _ <<< "$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$LIST")"
 [[ -n "${id:-}" && -n "${src_rel:-}" ]] || { echo "Invalid list entry" >&2; exit 1; }

@@ -9,7 +9,7 @@
 # 03-centred.nii.gz -> 03-slabcorr.nii.gz (+ provenance/slab-log.tsv when a slab is found; else unchanged copy)
 set -euo pipefail
 : "${ROOT:?}" "${GEN:?}" "${LIST:?}" "${SLAB_REF:?}"
-METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper/maper.sif}
+METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper-sif/maper.sif}
 TOOLS=${TOOLS:-$METS/apps/maper-hpc-workflow/scripts}
 id=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$LIST" | cut -f1); out="$ROOT/prepared/$GEN/$id"; mkdir -p "$out/provenance"
 apptainer exec --cleanenv --bind "$METS:$METS" "$MAPER_SIF" python3 "$TOOLS/slab-correct.py" \

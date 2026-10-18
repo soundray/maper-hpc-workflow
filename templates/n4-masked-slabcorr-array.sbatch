@@ -9,7 +9,7 @@
 # Required: ROOT, SRC_GEN (prepared generation holding 03-slabcorr.nii.gz), MASK_GEN (stage-1 pincram generation), OUT_GEN, LIST.
 set -euo pipefail
 : "${ROOT:?}" "${SRC_GEN:?}" "${MASK_GEN:?}" "${OUT_GEN:?}" "${LIST:?}"
-METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper/maper.sif}
+METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper-sif/maper.sif}
 id=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$LIST" | cut -f1); [[ -n "${id:-}" ]] || { echo "No target" >&2; exit 1; }
 src="$ROOT/prepared/$SRC_GEN/$id"; out="$ROOT/prepared/$OUT_GEN/$id"
 [[ ! -e "$out/T1.nii.gz" ]] || { echo "Output exists: $out/T1.nii.gz" >&2; exit 1; }

@@ -8,7 +8,7 @@
 # Required: ROOT, GEN (prepared generation with T1.nii.gz and parenchyma.nii.gz), LIST
 set -euo pipefail
 : "${ROOT:?}" "${GEN:?}" "${LIST:?}"
-METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper/maper.sif}
+METS=${METS:-/nobackup/proj/disk/metrimorphics0}; MAPER_SIF=${MAPER_SIF:-$METS/apps/maper-sif/maper.sif}
 id=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$LIST" | cut -f1); [[ -n "${id:-}" ]] || { echo "No target" >&2; exit 1; }
 d="$ROOT/prepared/$GEN/$id"
 for f in "$d/T1.nii.gz" "$d/parenchyma.nii.gz"; do [[ -s "$f" ]] || { echo "Missing input: $f" >&2; exit 1; }; done
